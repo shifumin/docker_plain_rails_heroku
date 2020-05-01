@@ -15,12 +15,12 @@ RUN apk update && \
         libffi-dev \
         tzdata
 
-RUN gem install bundler --no-document && \
+RUN gem install --no-document bundler && \
     gem update --system
 
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
-RUN bundle install --jobs=4 --no-cache
+RUN bundle install --jobs=4 --retry=3
 
 COPY . .
 
